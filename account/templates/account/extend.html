@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block estilos %}
+<style>
+    .bg-purpura{
+        background-color: #6C63FF;
+    }
+    a{
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+{% block contenido %}
+
+    {% load static %}
+    <div class="container">
+        <div class="row row-cols-sm-1 row-cols-lg-2 g-lg-5"> 
+            <div class="col-sm-12 col-lg-7">
+                <img class="img-fluid" src="{% static 'img/prueba.svg' %}" alt="">
+            </div>
+            {% include "./forms/login.html" %}
+        </div>
+    </div>
+{% endblock %}

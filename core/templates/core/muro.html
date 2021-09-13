@@ -1,0 +1,86 @@
+{% extends "core/base.html" %}
+
+{%block titulo %}Muro{%endblock%}
+
+{% block contenido  %}
+
+<div class="row justify-content-center mt-5">
+
+    <div class="col-11  mt-4 col-md-9 col-lg-7">
+        <!-- POST MESSAGE -->
+
+        <form action="/message/post" method="POST" class="">
+            {% csrf_token %}
+            <!-- <h6 class="text-primary" >Post a message</h6> -->    
+            <div class="input-group ">
+                <span class="input-group-text bg-t4 text-light">Message</span>
+                <textarea class="form-control" name="message" aria-label="Escribe aqui"></textarea>
+            </div>
+            <div class="text-end mt-2">
+                <button class="my-auto btn btn-t4 rounded-pill" type="submit" >Post a message!</button>
+            </div>
+        </form>
+
+        <!-- MESSAGES -->
+
+        {% for message in mensajes %}
+        <div class="row mt-2" >
+            
+            <div class="mensaje">
+                <hr class="mt-1">       
+                <h6 >{{message.user.nombre}} {{message.user.apellido}}<span class="text-secondary fw-lighter text-opacity-50"> • 33 seg ago</span></h6>
+                <p>{{message.message}}</p>
+                <a class="ms-1 pointer d-inline-block" ><i class="far fa-comment "> {{message.comments.count}}</i></a>
+                {% if message.user.id == request.session.usuario.id %}
+                    <form action="/message/delete" method="POST" class="d-inline-block ms-2 form-delete-msg">
+                        {% csrf_token %}
+                        <input type="hidden" name="message_id" value="{{message.id}}">
+                        <a class=" link-danger pointer"><i class="far fa-trash-alt"></i></a>
+                    </form>
+                {% endif %}
+            </div>
+
+            
+            <p class="ms-1 fw-bolder text-t2 text-comment mt-3 mb-2" >Comentarios:</p>
+
+            <div class="comentarioS">
+                {% for comment in message.comments.all %}
+                <div class="comement mb-3 ms-4">
+                    <h6>{{comment.user.nombre}} {{comment.user.apellido}}<span class="text-secondary fw-lighter text-opacity-50"> • 33 seg ago</span></h6>
+                    <p class="text-secondary">{{comment.comment}}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="post-comment">
+                <form action="/message/comment/post" method="POST" >
+                    {% csrf_token %}
+                    <div class="input-group ">
+                        <span class="input-group-text bg-t4 text-light">Comment</span>
+                        <textarea class="form-control text-secondary" name="comment" aria-label="Escribe aqui"></textarea>
+                        <input type="hidden" name="message_id" value="{{message.id}}">
+                    </div>
+                    <div class="text-end mt-2">
+                        <button class="my-auto btn btn-t4 rounded-pill" type="submit" >Post!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(".form-delete-msg").on("click",function(){
+       $(this).submit() 
+    });
+</script>
+
+{% endblock %}

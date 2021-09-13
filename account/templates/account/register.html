@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+{% block estilos %}
+{% endblock %}
+{% block contenido %}
+
+    {% load static %}
+    <div class="container mt-3 mt-lg-5">
+        <div class="row row-cols-1 row-cols-lg-2 "> 
+            <div class="col-12 col-lg-6 text-center my-auto">
+                <img class="img-fluid " src="{% static 'img/prueba.svg' %}" alt="">
+            </div>
+            <div class="mt-1 col-12 col-lg-6">
+                <h2>Registrate</h2>
+                <p>Registrate para poder acceder al contenido!</p>
+                <form action="" method="POST" class="">
+                    {% csrf_token %}
+                    <div class="">
+                        <div class="form-floating mb-1">
+                            <input type="text" class="form-control mb-1" id="InputNombre" name="nombre" placeholder="Nombre" required>
+                            <label for="InputNombre">Nombre</label>
+                        </div>
+                        <div class="form-floating mb-1">
+                            <input type="text" class="form-control" id="InputApellido" name="apellido" placeholder="Apellido" required>
+                            <label for="InputApellido">Apellido</label>
+                        </div>
+                    </div>
+                    <div class="form-floating   mb-1 ">
+                        <input type="date" class="form-control" id="InputBirthday" name="fecha_nacimiento" placeholder="Fecha Nacimiento" required>
+                        <label for="InputBirthday">Fecha Nacimiento</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="email" class="form-control" id="InputCorreo" name="email" placeholder="Email" required>
+                        <label for="InputCorreo">Email</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input id="InputPass" type="password" class="form-control" name="password" placeholder="Password" required>
+                        <label for="InputPass">Password</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="password" class="form-control" id="InputPassConfirm" name="confirm_pass" placeholder="Confirm Password" required>
+                        <label for="InputPassConfirm">Confirm Password</label>
+                    </div>
+                    <button class="text-light btn btn-lg bg-t3 mt-2 col-12" type="submit">Register</button>
+                    <div class="row mt-1 mb-4">
+                        <a href="login" class="link-secondary">Ya tienes cuenta? Logueate</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $("#navbar").hide()
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %} {% endblock %}</title>
+
+    <!-- BOOTSTRAP IMPORT CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+
+    <!-- JQUERY -->
+    <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <!-- CDN -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+
+    <!-- DATATABLES IMPORT -->
+    <link rel="stylesheet" type="text/css" href="{% static 'dataTables/jquery.dataTables.min.css' %}">
+    <script type="text/javascript"  src="{% static 'dataTables/jquery.dataTables.min.js' %}"></script>
+    <!-- CDN -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script> -->
+
+
+    <!-- TOASTR IMPORT -->
+    <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
+    <script type="text/javascript" src="{% static 'toastr/toastr.min.js' %}"></script>
+    
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <!-- ESTILOS -->
+    <!-- CSS MAIN STYLE -->
+    <link rel="stylesheet" href="{% static 'css/style.main.css' %}">
+    {% block estilos %} {% endblock %}
+
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand fixed-top navbar-dark bg-t2" id="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'img/Ticon.svg' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            El Muro
+          </a>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">inicio</a>
+              </li>
+            </ul>
+            <a href="/account/logout" ><img class="img-fluid" src="{% static 'img/logout.svg' %}"></img></a>
+          </div>
+        </div>
+    </nav>
+    <!-- CONTENIDO -->
+    <div class="mt-50">
+
+
+                     <!-- BREADCRUMB Y TITULO -->
+    
+    {% block contenido %} {% endblock %}
+
+    </div>
+
+    <!-- BOOTSTRAP IMPORT JS -->
+    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- {% if messages %}
+        {% for message in messages %}   
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% endfor %}
+    {% endif %} -->
+</div>
+
+</body>
+
+<script> 
+
+toastr.options = {
+  "closeButton": true,
+};
+
+{% if messages %}
+    {% for message in messages %}    
+        toastr.{{message.tags}}(`{{ message }}`)
+    {% endfor %}
+{% endif %}
+
+
+</script>
+
+
+{% block scripts %} {% endblock %}
+  
+</html>

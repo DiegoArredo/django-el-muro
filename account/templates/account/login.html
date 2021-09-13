@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+{% block estilos %}
+
+{% endblock %}
+{% block contenido %}
+
+    {% load static %}
+    <div class="container mt-3 mt-lg-5">
+        
+        <div class="row row-cols-sm-1 row-cols-lg-2  justify-content-between"> 
+            <div class="col-12 col-lg-6 text-center">
+                <img class="m-auto img-fluid" src="{% static 'img/prueba.svg' %}" alt="">
+            </div>
+            <div class="mt-2 col-12 col-lg-5 my-md-auto ">
+                <h2>Log in</h2>
+                <p>Logeate para continuar...</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-floating mb-1">
+                        <input type="email" class="form-control" id="InputCorreo" name="email" placeholder="Email" required>
+                        <label for="InputCorreo">Email</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input id="InputPass" type="password" class="form-control" name="password" placeholder="Password" required>
+                        <label for="InputPass">Password</label>
+                    </div>
+                    <button class="text-light w-100 btn btn-lg bg-t3 mt-2" type="submit">Log in</button>
+                    <div class="row mt-1 mb-4">
+                        <a href="register" class="link-secondary">No tienes cuenta Registrate!</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $("#navbar").hide()
+    });
+</script>
+{% endblock %}
